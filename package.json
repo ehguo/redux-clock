@@ -1,0 +1,13 @@
+{
+  "name": "redux-clock",
+  "version": "0.1.0",
+  "description": "Clock functions for redux apps",
+  "main": "index.js",
+  "repository": "https://github.com/ehguo/redux-clock.git",
+  "author": "Edward Guo",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-jest": "^21.2.0",
+    "jest": "^21.2.1"
+  }
+}
