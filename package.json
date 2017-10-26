@@ -16,5 +16,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "npm test -- --watch"
+  },
+  "dependencies": {
+    "reselect": "^3.0.1"
   }
 }

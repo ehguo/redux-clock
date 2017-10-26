@@ -4,47 +4,77 @@ import timerReducer, {
 } from '../../src/timer/timer';
 
 describe('actions', () => {
-  it('should create an action to start timer', () => {
-    const expectedAction = {
-      type: START_TIMER,
-      now: new Date().getTime()
+  let now;
+  let expectedAction;
+
+  beforeEach(() => {
+    now = new Date().getTime();
+    expectedAction = {
+      type: '',
+      now
     };
-    expect(actions.startTimer()).toEqual(expectedAction);
+  });
+
+  it('should create an action to start timer', () => {
+    expectedAction.type = START_TIMER;
+    expect(startTimer(now)).toEqual(expectedAction);
   });
 
   it('should create an action to stop timer', () => {
-    const expectedAction = {
-      type: STOP_TIMER,
-      now: new Date().getTime()
-    };
-    expect(actions.stopTimer()).toEqual(expectedAction);
+    expectedAction.type = STOP_TIMER;
+    expect(stopTimer(now)).toEqual(expectedAction);
   })
 
   it('should create an action to reset timer', () => {
-    const expectedAction = {
+    expectedAction = {
       type: RESET_TIMER
     };
-    expect(actions.resetTimer()).toEqual(expectedAction);
+    expect(resetTimer()).toEqual(expectedAction);
   });
 });
 
 describe('reducer', () => {
-  it('should return the initial state', () => {
-    expect(timerReducer(undefined, {})).toEqual({
+  let now;
+  let action;
+  let expectedState;
+
+  beforeEach(() => {
+    now = new Date().getTime();
+    action = {
+      type: ''
+    }
+    expectedState = {
       startTime: undefined,
-      stopTime: undefined
-    });
+      stopTime: undefined,
+      elapsedTime: undefined
+    };
+  });
+
+  it('should return the initial state', () => {
+    expect(timerReducer()).toEqual(expectedState);
   });
 
   it('should handle START_TIMER', () => {
-    expect(
-      timerReducer({}, {
-        type: START_TIMER,
-        now: new Date().getSeconds()
-      })
-    ).toEqual({
-      type: 'START_TIMER',
-      now: new Date().getTime()
-    });
+    action.type = START_TIMER;
+    action.now = now;
+    expectedState.startTime = now;
+    expect(timerReducer({}, action)).toEqual(expectedState);
+  });
+
+  it('should handle STOP_TIMER', () => {
+    action.type = STOP_TIMER;
+    action.now = now;
+    expectedState.stopTime = now;
+    expect(timerReducer({}, action)).toEqual(expectedState);
+  });
+
+  it('should handle RESET_TIMER', () => {
+    const mockState = {
+      startTime: 0,
+      stopTime: 1,
+      elapsedTime: 1
+    };
+    action.type = RESET_TIMER;
+    expect(timerReducer(mockState, action)).toEqual(expectedState);
   });
 });
