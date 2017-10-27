@@ -36,35 +36,32 @@ export default function timerReducer(state = initialState(), action = {}) {
 }
 
 // Selectors
-const timerSelector = state => state.timer;
+const startTimeSelector = state => state.timer.startTime;
+const stopTimeSelector = state => state.timer.stopTime;
 export const elapsedTimeSelector = createSelector(
-  timerSelector,
-  t => t
+  startTimeSelector,
+  (startTime, currTime) => currTime - startTime
 );
 
-export function startTimer(now) {
-  return {
-    type: START_TIMER,
-    now
-  };
-}
+// Actions
+export const startTimer = now => ({
+  type: START_TIMER,
+  now
+});
 
-export function stopTimer(now) {
-  return {
-    type: STOP_TIMER,
-    now
-  };
-}
+export const stopTimer = now => ({
+  type: STOP_TIMER,
+  now
+});
 
-export function elapsedTime() {
-  return {
-    type: ELAPSED_TIME,
-    time
-  };
-}
+export const elapsedTime = () => ({
+  type: ELAPSED_TIME,
+  time
+});
 
-export function resetTimer() {
-  return {
-    type: RESET_TIMER
-  };
-}
+export const resetTimer = () => ({
+  type: RESET_TIMER
+});
+
+// Utils
+

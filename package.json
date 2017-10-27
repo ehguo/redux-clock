@@ -14,7 +14,7 @@
     "webpack": "^3.8.1"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "npm test -- --watch"
   },
   "dependencies": {
